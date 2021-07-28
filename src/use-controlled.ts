@@ -6,12 +6,12 @@ export type UseControlledProps<T = unknown> = {
 };
 
 export function useControlled<T = unknown>(props: UseControlledProps<T>) {
-  const ref = React.useRef(props.controlled !== undefined);
+  const controlledRef = React.useRef(props.controlled !== undefined);
   const [valueState, setValue] = React.useState<T | undefined>(props.default);
-  const value = ref.current ? props.controlled : valueState;
+  const value = controlledRef.current ? props.controlled : valueState;
 
   const setValueIfUncontrolled: React.Dispatch<T> = React.useCallback((newValue) => {
-    if (!ref.current) {
+    if (!controlledRef.current) {
       setValue(newValue);
     }
   }, []);
