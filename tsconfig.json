@@ -5,8 +5,5 @@
     "target": "ES6",
     "outDir": "dist"
   },
-  "include": [
-    "src",
-    "tests"
-  ]
+  "include": ["src", "tests"]
 }

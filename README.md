@@ -14,9 +14,9 @@ get around it, we can conditionally `useEffect` on the server (no-op) and
 import { useIsomorphicLayoutEffect } from '@straw-hat/react-hooks';
 
 function MyComponent() {
-  useIsomorphicLayoutEffect(()=> {
+  useIsomorphicLayoutEffect(() => {
     // ...
-  }, deps)
+  }, deps);
 }
 ```
 
@@ -25,9 +25,9 @@ function MyComponent() {
 Used to create controlled values, useful for building controlled Form inputs.
 
 ```tsx
-import * as React from "react";
-import CheckIcon from "@material-ui/icons/Check";
-import { FormState } from "react-hook-form";
+import * as React from 'react';
+import CheckIcon from '@material-ui/icons/Check';
+import { FormState } from 'react-hook-form';
 
 import { useControlled } from '@straw-hat/react-hooks';
 
@@ -40,10 +40,7 @@ interface CheckboxInputProps {
   onChange?: React.ChangeEventHandler<any>;
 }
 
-export const CheckboxInput = React.forwardRef<
-  HTMLInputElement,
-  CheckboxInputProps
->((props, ref) => {
+export const CheckboxInput = React.forwardRef<HTMLInputElement, CheckboxInputProps>((props, ref) => {
   const [checked, setCheckedState] = useControlled({
     controlled: props.checked,
     default: Boolean(props.defaultChecked),
@@ -67,17 +64,9 @@ export const CheckboxInput = React.forwardRef<
         onChange={onChange}
       />
       <div className="w-4 h-4 p-3  bg-red-700 rounded-md flex items-center justify-center">
-        {checked && (
-          <CheckIcon
-            className="text-white"
-            color="inherit"
-            fontSize="inherit"
-          />
-        )}
+        {checked && <CheckIcon className="text-white" color="inherit" fontSize="inherit" />}
       </div>
-      <span className="ml-3 text-sm md:text-base font-semibold text-gray-600">
-        {props.label}
-      </span>
+      <span className="ml-3 text-sm md:text-base font-semibold text-gray-600">{props.label}</span>
     </label>
   );
 });
@@ -88,7 +77,7 @@ export const CheckboxInput = React.forwardRef<
 Used to inject `script` tags.
 
 ```tsx
-import * as React from "react";
+import * as React from 'react';
 import { useScript } from '@straw-hat/react-hooks';
 
 function MyComponent() {
@@ -100,11 +89,7 @@ function MyComponent() {
     }
   }, [status]);
 
-  return (
-    <>
-      ...
-    </>
-  )
+  return <>...</>;
 }
 ```
 
@@ -114,7 +99,7 @@ React state hook that returns the previous state as described in the
 [React hooks FAQ](https://reactjs.org/docs/hooks-faq.html#how-to-get-the-previous-props-or-state).
 
 ```tsx
-import * as React from "react";
+import * as React from 'react';
 import { usePrevious } from '@straw-hat/react-hooks';
 
 function MyComponent() {
@@ -143,7 +128,7 @@ inside an asynchronous callback, instead of that value at the time the callback
 was created from.
 
 ```tsx
-import * as React from "react";
+import * as React from 'react';
 import { useLatest } from '@straw-hat/react-hooks';
 
 function MyComponent() {
@@ -160,13 +145,30 @@ function MyComponent() {
   return (
     <div>
       <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-      <button onClick={handleAlertClick}>
-        Show alert
-      </button>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+      <button onClick={handleAlertClick}>Show alert</button>
     </div>
   );
+}
+```
+
+### useEventListener
+
+Register an event handler.
+
+```tsx
+import * as React from 'react';
+import { useEventListener } from '@straw-hat/react-hooks';
+
+function MyComponent() {
+  useEventListener({
+    element: window,
+    type: 'resize',
+    listener() {
+      console.log('resizing');
+    },
+  });
+
+  return <>...</>;
 }
 ```

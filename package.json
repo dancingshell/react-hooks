@@ -1,6 +1,6 @@
 {
   "name": "@straw-hat/react-hooks",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A collection of React hooks",
   "repository": {
     "type": "git",
@@ -19,7 +19,9 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.prod.json",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "format": "prettier --write */** --ignore-unknown --no-error-on-unmatched-pattern",
+    "ci:format": "yarn format --check"
   },
   "type": "commonjs",
   "main": "dist/index.js",
