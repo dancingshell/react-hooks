@@ -82,3 +82,28 @@ export const CheckboxInput = React.forwardRef<
   );
 });
 ```
+
+### useScript
+
+Used to inject `script` tags.
+
+```tsx
+import * as React from "react";
+import { useScript } from '@straw-hat/react-hooks';
+
+function MyApp() {
+  const { status, isReady } = useScript({ src: 'https://bit.ly/3se7YYw' });
+
+  React.useEffect(() => {
+    if (isReady) {
+      // Do stuff from the script if you need to
+    }
+  }, [status]);
+
+  return (
+    <>
+      ...
+    </>
+  )
+}
+```
