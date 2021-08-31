@@ -172,3 +172,42 @@ function MyComponent() {
   return <>...</>;
 }
 ```
+
+### createContextHook
+
+Creates a Context from a regular hook, following a particular boilerplate
+pattern. It will return the "context hook" and the Provider component.
+
+```tsx
+// use-my-hook.ts
+import * as React from 'react';
+import { createContextHook } from '@straw-hat/react-hooks';
+
+// 1. Create your hook
+type UseMyHookProps = {
+  initialValue: number;
+}
+
+function useMyHook(props: UseMyHookProps) {
+  const [value, setValue] = React.useState(props.initialValue);
+  return { value, setValue };
+}
+
+// 2. Create the Context Hook and Provider
+
+const [MyHookProvider, useMyHookContext] = createContextHook<
+  // the return value of the hook
+  ReturnType<typeof useMyHook>,
+  // the hook input parameter
+  UseMyHookProps
+>(
+  // Pass your hook reference
+  useMyHook,
+  {
+    // `name` is used for debugging propose when you failed to connect the hook
+    name: "MyHook"
+  }
+);
+
+export { MyHookProvider, useMyHookContext };
+```
